@@ -67,8 +67,8 @@ class User extends Component {
 			<div className={ styles['root'] }>
                 <div className={ styles['header'] }>
                     {/* <Link className={ styles['link'] } to={'/projects'}>projects</Link> */}
-                    <div>
-                        <small  className={styles["user"]}>{user.email}</small>
+                    <div className={styles["user-header"]}>
+                        <small className={styles["user"]}>{user.email}</small>
                         <Logout />
                     </div>
                 </div>

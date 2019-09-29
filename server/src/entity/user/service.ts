@@ -14,5 +14,5 @@ export async function getUserByEmail(email: string): Promise<User | undefined> {
 
 export async function createUser(email: string, password: string): Promise<User | undefined> {
     const passwordHash = bcrypt.hashSync(password, 10);
-    return await dbConn.from("users").insert({email, passwordHash});;
+    return await dbConn.from("users").insert({email, passwordHash});
 }

@@ -59,6 +59,9 @@ class Login extends Component {
         const { ...user } = token && JSON.parse(atob(token.split('.')[1]))
         
 		if (user && user.id) {
+            if(user.email === 'admin'){
+                return <Redirect to={ '/users' } />
+            }
 			return <Redirect to={ '/' } />
 		}
 

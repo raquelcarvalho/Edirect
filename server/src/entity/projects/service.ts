@@ -1,4 +1,4 @@
-import { Project, IProject, ITask, Task } from "./model";
+import { Project, Task } from "./model";
 import dbConn from "../../config/db";
 
 export async function getProjects(user_id: string): Promise<Project[] | null> {
@@ -46,4 +46,44 @@ export async function getProjects(user_id: string): Promise<Project[] | null> {
     // conectar tudo
 
     return result;
+}
+
+export async function createProject(name: string, user_id: string) {
+    const projectId = await dbConn.from("projects").insert({name});
+    await dbConn.from("projects_users").insert({project_id: projectId[0], user_id})
+
+    return projectId;
+}
+
+export async function editProject(id: string, name: string) {
+    return await dbConn.from("projects").update({name}).where({id});
+}
+
+export async function deleteProject(id: string) {
+    await dbConn.del().from("projects_users").where({project_id: id});
+    return await dbConn.del().from("projects").where({id});
+}
+
+export async function createTask(project_id: string, taskName: string) {
+    return await dbConn.from("tasks").insert({
+        project_id,
+        descricao: taskName,
+        created_at: new Date(),
+        updated_at: new Date()
+    });
+}
+
+export async function deleteTask(id: string) {
+    return await dbConn.del().from("tasks").where({id});
+}
+
+export async function editTask(id: string, descricao: string) {
+    return await dbConn.from("tasks").update({descricao}).where({id});
+}
+
+export async function editStatusTask(id: string) {
+    return await dbConn.from("tasks").update({
+        status: 1,
+        updated_at: new Date()
+    }).where({id});
 }
