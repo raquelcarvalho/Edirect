@@ -33,4 +33,13 @@ Use username and password:
 ```bash
 raquelvieiraph@gmail.com
 123456
+
+-----------
+
+raquelvieira1ph@gmail.com
+123456
+
+(Admin)
+admin
+123456
 ```
